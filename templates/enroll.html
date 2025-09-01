@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Enroll Student in Course</h2>
+
+{% if students and courses %}
+<form method="post" action="/enroll">
+    Student:
+    <select name="student_id">
+        {% for student in students %}
+        <option value="{{ student.student_id }}">{{ student.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    Course:
+    <select name="course_id">
+        {% for course in courses %}
+        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Enroll</button>
+</form>
+{% else %}
+<p><strong>No students or courses available to enroll yet.</strong></p>
+{% endif %}
+{% endblock %}

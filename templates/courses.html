@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Courses</h2>
+
+{% if courses %}
+<ul>
+    {% for course in courses %}
+    <li>
+        {{ course.course_name }} (ID: {{ course.course_id }}, Credits: {{ course.credits }})
+        {% if course.students %}
+            <ul>
+                {% for student in course.students %}
+                <li>{{ student.name }} (ID: {{ student.student_id }})</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <em>No students enrolled</em>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p><strong>No courses added yet.</strong></p>
+{% endif %}
+
+<h3>Add Course</h3>
+<form method="post" action="/add_course">
+    ID: <input type="text" name="course_id"><br>
+    Name: <input type="text" name="course_name"><br>
+    Credits: <input type="number" name="credits"><br>
+    <button type="submit">Add</button>
+</form>
+{% endblock %}
